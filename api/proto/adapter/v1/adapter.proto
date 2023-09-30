@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package adapter.v1;
+
+option go_package = "scylla-grpc-adapter/gen/adapter/v1;adapterv1";
+
+service AdapterService {
+  rpc Get (GetRequest) returns (GetResponse) {}
+}
+
+message GetRequest {
+  string value = 1;
+}
+
+message GetResponse {
+  string message = 1;
+}
