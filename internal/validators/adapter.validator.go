@@ -2,13 +2,11 @@ package validators
 
 import (
 	"fmt"
-	"log"
 
 	adapterv1 "scylla-grpc-adapter/gen/adapter/v1"
 )
 
-func ValidateAdapterRequest(req *adapterv1.GetRequest) error {
-	log.Println("Validating request: ", req)
+func ValidateAdapterRequest(req *adapterv1.PostRequest) error {
 	if req.Value == "" {
 		return fmt.Errorf("value is required")
 	}
