@@ -2,11 +2,14 @@ package main
 
 import (
 	"scylla-grpc-adapter/config"
+	"scylla-grpc-adapter/internal/app"
 	"scylla-grpc-adapter/internal/server"
 )
 
 func main() {
-	config := config.NewConfig()
+	cfg := config.NewConfig()
 
-	server.LaunchServer(config)
+	app := app.NewApp(cfg)
+
+	server.LaunchServer(cfg, app)
 }

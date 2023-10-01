@@ -16,8 +16,7 @@ func ValidateEnvs() map[string]string {
 	envs := map[string]string{
 		"HOST": os.Getenv("HOST"),
 		"PORT": os.Getenv("PORT"),
-		"DB_HOST": os.Getenv("DB_HOST"),
-		"DB_PORT": os.Getenv("DB_PORT"),
+		"DB_HOSTS": os.Getenv("DB_HOSTS"),
 		"DB_KEYSPACE": os.Getenv("DB_KEYSPACE"),
 	}
 

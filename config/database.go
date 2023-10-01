@@ -1,15 +1,18 @@
 package config
 
+import "strings"
+
 type DatabaseConfig struct {
-	Host string
-	Port string
+	Hosts []string
 	Keyspace string
 }
 
 func LoadDatabaseConfig(envs map[string]string) DatabaseConfig {
+
+	hosts := strings.Split(envs["DB_HOSTS"], ",")
+
 	return DatabaseConfig{
-		Host: envs["DB_HOST"],
-		Port: envs["DB_PORT"],
+		Hosts: hosts,
 		Keyspace: envs["DB_KEYSPACE"],
 	}
 }
