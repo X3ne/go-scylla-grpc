@@ -5,5 +5,6 @@ USE users;
 CREATE TABLE users (
   id text,
   username text,
+  password text,
   primary key((id, username))
 );

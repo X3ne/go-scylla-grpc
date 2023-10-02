@@ -15,15 +15,16 @@ import (
 
 	"scylla-grpc-adapter/config"
 	"scylla-grpc-adapter/gen/adapter/v1/adapterv1connect"
-	"scylla-grpc-adapter/internal/app"
+	"scylla-grpc-adapter/gen/users/v1/usersv1connect"
 	"scylla-grpc-adapter/internal/gateway"
 )
 
-func LaunchServer(cfg *config.Config, app *app.App) {
+type Server struct {}
+
+func LaunchServer(cfg *config.Config) {
 	api  := http.NewServeMux()
-	api.Handle(adapterv1connect.NewAdapterServiceHandler(&gateway.AdaperServer{
-		App: app,
-	}))
+	api.Handle(adapterv1connect.NewAdapterServiceHandler(&gateway.AdaperServer{}))
+	api.Handle(usersv1connect.NewUsersServiceHandler(&gateway.UsersServer{}))
 
 	mux := http.NewServeMux()
 	mux.Handle("/api/", http.StripPrefix("/api", api))
@@ -37,7 +38,7 @@ func LaunchServer(cfg *config.Config, app *app.App) {
 		ReadHeaderTimeout: time.Second,
 		ReadTimeout:       5 * time.Minute,
 		WriteTimeout:      5 * time.Minute,
-		MaxHeaderBytes:    8 * 1024, // 8KiB
+		MaxHeaderBytes:    8 * 1024,
 	}
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt, syscall.SIGTERM)
