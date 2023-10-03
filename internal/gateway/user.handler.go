@@ -95,30 +95,3 @@ func (*UsersServer) GetAll(ctx context.Context, req *connect.Request[usersv1.Get
 
 	return res, nil
 }
-
-func (*UsersServer) Post(ctx context.Context, req *connect.Request[usersv1.PostRequest]) (*connect.Response[usersv1.PostResponse], error) {
-	if err := ctx.Err(); err != nil {
-		return nil, err
-	}
-
-	if err := validators.ValidateCreateUserRequest(req.Msg); err != nil {
-		return nil, connect.NewError(connect.CodeInvalidArgument, err)
-	}
-
-	user := &services.User{
-		Username: req.Msg.Username,
-		Password: req.Msg.Password,
-	}
-
-	if err := services.CreateUser(user); err != nil {
-		return nil, err
-	}
-
-	res := connect.NewResponse(&usersv1.PostResponse{
-		Message: "User created",
-	})
-
-	res.Header().Set("Users-Version", "v1")
-
-	return res, nil
-}

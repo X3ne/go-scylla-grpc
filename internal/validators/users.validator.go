@@ -19,13 +19,3 @@ func ValidateGetUserByUsernameRequest(req *usersv1.GetByUsernameRequest) error {
 	}
 	return nil
 }
-
-func ValidateCreateUserRequest(req *usersv1.PostRequest) error {
-	if req.Username == "" {
-		return fmt.Errorf("username is required")
-	}
-	if req.Password == "" {
-		return fmt.Errorf("password is required")
-	}
-	return nil
-}

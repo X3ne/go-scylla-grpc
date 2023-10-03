@@ -18,6 +18,8 @@ func ValidateEnvs() map[string]string {
 		"PORT": os.Getenv("PORT"),
 		"DB_HOSTS": os.Getenv("DB_HOSTS"),
 		"DB_KEYSPACE": os.Getenv("DB_KEYSPACE"),
+		"JWT_SECRET_KEY": os.Getenv("JWT_SECRET_KEY"),
+		"JWT_TOKEN_DURATION": os.Getenv("JWT_TOKEN_DURATION"),
 	}
 
 	for key, value := range envs {

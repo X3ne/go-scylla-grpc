@@ -8,7 +8,6 @@ service UsersService {
   rpc GetById (GetByIdRequest) returns (GetByIdResponse) {}
   rpc GetByUsername (GetByUsernameRequest) returns (GetByUsernameResponse) {}
   rpc GetAll (GetAllRequest) returns (GetAllResponse) {}
-  rpc Post (PostRequest) returns (PostResponse) {}
   // rpc Put (PutRequest) returns (PutResponse) {}
   // rpc Delete (DeleteRequest) returns (DeleteResponse) {}
 }
@@ -39,15 +38,6 @@ message GetAllRequest {
 
 message GetAllResponse {
   repeated GetResponse users = 1;
-}
-
-message PostRequest {
-  string username = 1;
-  string password = 2;
-}
-
-message PostResponse {
-  string message = 1;
 }
 
 message PutRequest {

@@ -3,6 +3,7 @@ package config
 type Config struct {
 	SERVER	ServerConfig
 	DB			DatabaseConfig
+	JWT			JwtConfig
 }
 
 func NewConfig() *Config {
@@ -11,5 +12,6 @@ func NewConfig() *Config {
 	return &Config{
 		SERVER: LoadServerConfig(envs),
 		DB: LoadDatabaseConfig(envs),
+		JWT: LoadJwtConfig(envs),
 	}
 }

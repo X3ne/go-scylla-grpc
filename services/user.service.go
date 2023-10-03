@@ -33,6 +33,19 @@ func CreateUser(user *User) error {
 
 	user.Id = node.Generate().String()
 
+	hash, err := HashPassword(user.Password, &params{
+		memory:      64 * 1024,
+		iterations:  3,
+		parallelism: 2,
+		keyLength:   32,
+		saltLength:  16,
+	})
+	if err != nil {
+		return err
+	}
+
+	user.Password = string(hash)
+
 	if err := Session.Query(personTable.Insert()).BindStruct(user).ExecRelease(); err != nil {
 		return err
 	}

@@ -10,21 +10,30 @@ import (
 	"syscall"
 	"time"
 
+	"connectrpc.com/connect"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
 	"scylla-grpc-adapter/config"
-	"scylla-grpc-adapter/gen/adapter/v1/adapterv1connect"
+	"scylla-grpc-adapter/gen/auth/v1/authv1connect"
 	"scylla-grpc-adapter/gen/users/v1/usersv1connect"
 	"scylla-grpc-adapter/internal/gateway"
+	"scylla-grpc-adapter/internal/interceptors"
+	"scylla-grpc-adapter/services"
 )
 
 type Server struct {}
 
 func LaunchServer(cfg *config.Config) {
+	jwtManager := services.NewJwtManager(cfg.JWT.SecretKey, cfg.JWT.TokenDuration)
+
+	interceptors := connect.WithInterceptors(interceptors.NewAuthInterceptor(jwtManager))
 	api  := http.NewServeMux()
-	api.Handle(adapterv1connect.NewAdapterServiceHandler(&gateway.AdaperServer{}))
-	api.Handle(usersv1connect.NewUsersServiceHandler(&gateway.UsersServer{}))
+
+	api.Handle(authv1connect.NewAuthServiceHandler(&gateway.AuthServer{
+		JwtManager: jwtManager,
+	}))
+	api.Handle(usersv1connect.NewUsersServiceHandler(&gateway.UsersServer{}, interceptors))
 
 	mux := http.NewServeMux()
 	mux.Handle("/api/", http.StripPrefix("/api", api))

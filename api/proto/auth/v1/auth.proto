@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package auth.v1;
+
+option go_package = "scylla-grpc-adapter/gen/auth/v1;authv1";
+
+service AuthService {
+  rpc Register(PostRequest) returns (SuccessResponse) {}
+  rpc Login(PostRequest) returns (LoginResponse) {}
+}
+
+message PostRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message SuccessRegister {
+  string username = 1;
+  string token = 2;
+}
+
+message SuccessResponse {
+  string message = 1;
+}
+
+message LoginResponse {
+  string username = 1;
+  string token = 2;
+}
