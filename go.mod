@@ -7,7 +7,6 @@ require (
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/gocql/gocql v1.6.0
 	github.com/joho/godotenv v1.5.1
-	github.com/scylladb/gocqlx v1.5.0
 	github.com/scylladb/gocqlx/v2 v2.8.0
 	golang.org/x/net v0.15.0
 	google.golang.org/protobuf v1.31.0

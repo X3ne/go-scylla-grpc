@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	session	gocqlx.Session
+	Session	gocqlx.Session
 )
 
 func InitScylla(cfg *config.Config) {
@@ -20,7 +20,7 @@ func InitScylla(cfg *config.Config) {
 	cluster.Keyspace = cfg.DB.Keyspace
 
 	var err error
-	session, err = gocqlx.WrapSession(cluster.CreateSession())
+	Session, err = gocqlx.WrapSession(cluster.CreateSession())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -30,6 +30,6 @@ func InitScylla(cfg *config.Config) {
 
 func CloseScylla() {
 	log.Println("Closing ScyllaDB connection...")
-	session.Close()
+	Session.Close()
 	log.Println("ScyllaDB connection closed")
 }

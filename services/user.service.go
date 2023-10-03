@@ -1,9 +1,13 @@
 package services
 
 import (
+	"log"
+	"reflect"
+	pool "scylla-grpc-adapter/services/scylla-workers"
+
 	"github.com/bwmarrin/snowflake"
-	"github.com/scylladb/gocqlx/qb"
-	"github.com/scylladb/gocqlx/table"
+	"github.com/scylladb/gocqlx/v2/qb"
+	"github.com/scylladb/gocqlx/v2/table"
 )
 
 var usersMetadata = table.Metadata{
@@ -29,7 +33,7 @@ func CreateUser(user *User) error {
 
 	user.Id = node.Generate().String()
 
-	if err := session.Query(personTable.Insert()).BindStruct(user).ExecRelease(); err != nil {
+	if err := Session.Query(personTable.Insert()).BindStruct(user).ExecRelease(); err != nil {
 		return err
 	}
 
@@ -44,7 +48,13 @@ func GetUserById(id string) (*User, error) {
 		ToCql()
 
 	var user User
-	if err := session.Query(stmt, names).BindMap(qb.M{"id": id}).GetRelease(&user); err != nil {
+	q := Session.Query(stmt, names).BindMap(qb.M{"id": id})
+
+	log.Println(q.String())
+
+	pool.HandleQuery(q, reflect.TypeOf(User{}))
+
+	if err := q.GetRelease(&user); err != nil {
 		return nil, err
 	}
 
@@ -59,7 +69,13 @@ func GetUserByUsername(username string) (*User, error) {
 		ToCql()
 
 	var user User
-	if err := session.Query(stmt, names).BindMap(qb.M{"username": username}).GetRelease(&user); err != nil {
+	q := Session.Query(stmt, names).BindMap(qb.M{"username": username})
+
+	log.Println(q.String())
+
+	pool.HandleQuery(q, reflect.TypeOf(User{}))
+
+	if err := q.GetRelease(&user); err != nil {
 		return nil, err
 	}
 
@@ -73,7 +89,11 @@ func GetUsers() ([]*User, error) {
 		ToCql()
 
 	var users []*User
-	if err := session.Query(stmt, names).SelectRelease(&users); err != nil {
+	q := Session.Query(stmt, names)
+
+	pool.HandleQuery(q, reflect.TypeOf([]*User{}))
+
+	if err := q.SelectRelease(&users); err != nil {
 		return nil, err
 	}
 
@@ -81,7 +101,7 @@ func GetUsers() ([]*User, error) {
 }
 
 func UpdateUser(user *User) error {
-	if err := session.Query(personTable.Update()).BindStruct(user).ExecRelease(); err != nil {
+	if err := Session.Query(personTable.Update()).BindStruct(user).ExecRelease(); err != nil {
 		return err
 	}
 
@@ -89,7 +109,7 @@ func UpdateUser(user *User) error {
 }
 
 func DeleteUser(id string) error {
-	if err := session.Query(personTable.Delete()).BindStruct(User{Id: id}).ExecRelease(); err != nil {
+	if err := Session.Query(personTable.Delete()).BindStruct(User{Id: id}).ExecRelease(); err != nil {
 		return err
 	}
 
