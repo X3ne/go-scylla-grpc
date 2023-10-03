@@ -3,9 +3,9 @@ package gateway
 import (
 	"context"
 
-	usersv1 "scylla-grpc-adapter/gen/users/v1"
-	"scylla-grpc-adapter/internal/validators"
-	"scylla-grpc-adapter/services"
+	usersv1 "github.com/X3ne/go-scylla-grpc/gen/users/v1"
+	"github.com/X3ne/go-scylla-grpc/internal/validators"
+	"github.com/X3ne/go-scylla-grpc/services"
 
 	"connectrpc.com/connect"
 )

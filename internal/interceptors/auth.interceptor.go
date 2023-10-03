@@ -4,8 +4,9 @@ import (
 	"context"
 	"errors"
 	"log"
-	api_errors "scylla-grpc-adapter/internal/errors"
-	"scylla-grpc-adapter/services"
+
+	api_errors "github.com/X3ne/go-scylla-grpc/internal/errors"
+	"github.com/X3ne/go-scylla-grpc/services"
 
 	"connectrpc.com/connect"
 )

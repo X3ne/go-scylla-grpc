@@ -3,10 +3,11 @@ package gateway
 import (
 	"context"
 	"errors"
-	authv1 "scylla-grpc-adapter/gen/auth/v1"
-	api_errors "scylla-grpc-adapter/internal/errors"
-	"scylla-grpc-adapter/internal/validators"
-	"scylla-grpc-adapter/services"
+
+	authv1 "github.com/X3ne/go-scylla-grpc/gen/auth/v1"
+	api_errors "github.com/X3ne/go-scylla-grpc/internal/errors"
+	"github.com/X3ne/go-scylla-grpc/internal/validators"
+	"github.com/X3ne/go-scylla-grpc/services"
 
 	"connectrpc.com/connect"
 )

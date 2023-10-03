@@ -2,8 +2,9 @@ package services
 
 import (
 	"errors"
-	api_errors "scylla-grpc-adapter/internal/errors"
 	"time"
+
+	api_errors "github.com/X3ne/go-scylla-grpc/internal/errors"
 
 	"github.com/dgrijalva/jwt-go"
 )

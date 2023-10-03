@@ -3,7 +3,8 @@ package services
 import (
 	"log"
 	"reflect"
-	pool "scylla-grpc-adapter/services/scylla-workers"
+
+	pool "github.com/X3ne/go-scylla-grpc/services/scylla-workers"
 
 	"github.com/bwmarrin/snowflake"
 	"github.com/scylladb/gocqlx/v2/qb"

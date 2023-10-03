@@ -2,7 +2,8 @@ package validators
 
 import (
 	"fmt"
-	authv1 "scylla-grpc-adapter/gen/auth/v1"
+
+	authv1 "github.com/X3ne/go-scylla-grpc/gen/auth/v1"
 )
 
 func ValidateAuthRequest(req *authv1.PostRequest) error {

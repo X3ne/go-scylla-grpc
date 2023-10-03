@@ -14,12 +14,12 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
-	"scylla-grpc-adapter/config"
-	"scylla-grpc-adapter/gen/auth/v1/authv1connect"
-	"scylla-grpc-adapter/gen/users/v1/usersv1connect"
-	"scylla-grpc-adapter/internal/gateway"
-	"scylla-grpc-adapter/internal/interceptors"
-	"scylla-grpc-adapter/services"
+	"github.com/X3ne/go-scylla-grpc/config"
+	"github.com/X3ne/go-scylla-grpc/gen/auth/v1/authv1connect"
+	"github.com/X3ne/go-scylla-grpc/gen/users/v1/usersv1connect"
+	"github.com/X3ne/go-scylla-grpc/internal/gateway"
+	"github.com/X3ne/go-scylla-grpc/internal/interceptors"
+	"github.com/X3ne/go-scylla-grpc/services"
 )
 
 type Server struct {}

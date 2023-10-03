@@ -1,4 +1,4 @@
-module scylla-grpc-adapter
+module github.com/X3ne/go-scylla-grpc
 
 go 1.21.1
 

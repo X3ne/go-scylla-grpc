@@ -2,7 +2,8 @@ package services
 
 import (
 	"log"
-	"scylla-grpc-adapter/config"
+
+	"github.com/X3ne/go-scylla-grpc/config"
 
 	"github.com/gocql/gocql"
 	"github.com/scylladb/gocqlx/v2"

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package auth.v1;
 
-option go_package = "scylla-grpc-adapter/gen/auth/v1;authv1";
+option go_package = "github.com/X3ne/go-scylla-grpc/gen/auth/v1;authv1";
 
 service AuthService {
   rpc Register(PostRequest) returns (SuccessResponse) {}

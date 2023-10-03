@@ -1,9 +1,9 @@
 package main
 
 import (
-	"scylla-grpc-adapter/config"
-	"scylla-grpc-adapter/internal/server"
-	"scylla-grpc-adapter/services"
+	"github.com/X3ne/go-scylla-grpc/config"
+	"github.com/X3ne/go-scylla-grpc/internal/server"
+	"github.com/X3ne/go-scylla-grpc/services"
 )
 
 func main() {

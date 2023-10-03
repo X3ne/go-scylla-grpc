@@ -3,7 +3,7 @@ package validators
 import (
 	"fmt"
 
-	usersv1 "scylla-grpc-adapter/gen/users/v1"
+	usersv1 "github.com/X3ne/go-scylla-grpc/gen/users/v1"
 )
 
 func ValidateGetUserByIdRequest(req *usersv1.GetByIdRequest) error {
